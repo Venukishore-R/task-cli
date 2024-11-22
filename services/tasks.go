@@ -76,14 +76,11 @@ func saveTasks() error {
 	if err != nil {
 		return fmt.Errorf("unable to write to file: %v", err)
 	}
-	fmt.Println("t", tasks)
 	return nil
 }
 
 func UpdateTask(id int, description string) error {
 	for _, task := range tasks {
-		fmt.Println("tals", task)
-
 		if task.Id == id {
 			task.Description = description
 			task.UpdatedAt = time.Now()
@@ -116,22 +113,24 @@ func UpdateProgress(id int, status string) error {
 	return fmt.Errorf("task not found")
 }
 
-func ListTasks(status string) ([]Task, error) {
-	var filteredTasks []Task
+func ListTasks(status string) ([]*Task, error) {
+	// var finalTasks []string
+	var finalTasks []*Task
 
 	if status == "all" {
-		for _, task := range tasks {
-			filteredTasks = append(filteredTasks, *task)
-		}
+		// for _, task := range tasks {
+		// 	finalTasks = append(finalTasks, task.Description)
+		// }
+		return tasks, nil
 	} else {
 		for _, task := range tasks {
 
 			if task.Status == status {
-				fmt.Println(task)
-				filteredTasks = append(filteredTasks, *task)
+				finalTasks = append(finalTasks, task)
+
 			}
 		}
 	}
 
-	return filteredTasks, nil
+	return finalTasks, nil
 }

@@ -5,7 +5,9 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"task-cli/services"
+	"text/tabwriter"
 
 	"github.com/spf13/cobra"
 )
@@ -39,10 +41,19 @@ var listCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Println("Tasks:")
+		writer := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', tabwriter.Debug)
+
+		// Print header
+		fmt.Fprintln(writer, "ID\tDescription\t\t\tStatus")
+		fmt.Fprintln(writer, "----\t---------------------------------\t--------")
+
+		// Print rows
 		for _, task := range tasks {
-			fmt.Printf("- %s\n", task) // Assuming task has a string representation
+			fmt.Fprintf(writer, "%d\t%s\t\t\t%s\n", task.Id, task.Description, task.Status)
 		}
+
+		// Flush the writer to output the formatted table
+		writer.Flush()
 	},
 }
 
