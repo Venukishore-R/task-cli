@@ -79,3 +79,4 @@ task-cli --help
 ```
 ## Conclusion
 The CLI Task Manager provides a straightforward interface for managing tasks directly from the command line, making it a useful tool for productivity and organization.
+For more details about the project, check out the [Task Tracker Project on Roadmap.sh](https://roadmap.sh/projects/task-tracker).
